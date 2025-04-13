@@ -11,10 +11,14 @@ MCUFRIEND_kbv tft;
 #define BLACK   0x0000
 #define RED     0xF800
 #define ORANGE  0xFA60
+#define BLUE    0x13B8
 #define GREEN   0x07E0
 #define YELLOW  0xFFE0
 #define WHITE   0xFFFF
 #define GREY    0x8410
+
+String station_name = "Rosslyn";
+uint16_t lines[3] = {ORANGE, BLUE, GREY};
 
 void setup(void)
 {
@@ -98,16 +102,18 @@ void showHeader(bool error)
   tft.setTextColor(WHITE, BLACK);
   tft.setTextSize(1);
   tft.setFont(&FreeSansBold18pt7b);
-  String station_name = "Court House";
 
   int16_t  x1, y1;
   uint16_t w, h;
   tft.getTextBounds(station_name, 0, 0, &x1, &y1, &w, &h);
   const int header_end_h = h+60;
   const int line_width = 20;
-  tft.fillRect(0, 0, line_width, header_end_h, GREY);
-  tft.fillRect(line_width, 0, line_width, header_end_h, ORANGE);
-  tft.setCursor(line_width*3, h+30);
+  int offset = 0;
+  for (uint16_t color : lines) {
+    tft.fillRect(line_width*offset, 0, line_width, header_end_h, color);
+    offset++;
+  }
+  tft.setCursor(line_width*(offset+1), h+30);
   tft.print(station_name);
   // tft.drawFastHLine(0, header_end_h, tft.width(), WHITE);
   // tft.setFont(NULL);

@@ -3,8 +3,8 @@
 #include <WiFiClient.h>
 #include <ArduinoJson.h>
 
-const char* ssid     = "letsgooooo";         // The SSID (name) of the Wi-Fi network you want to connect to
-const char* password = "53xIbois";     // The password of the Wi-Fi network
+const char* ssid     = "ResistanceCamp-DC";         // The SSID (name) of the Wi-Fi network you want to connect to
+const char* password = "embarctv";     // The password of the Wi-Fi network
 
 void setup() {
   Serial.begin(9600);         // Start the Serial communication to send messages to the computer
@@ -49,7 +49,7 @@ void loop() {
     HTTPClient http;
     char payload[1200];
 
-    if (http.begin(client, "http://api.wmata.com/StationPrediction.svc/json/GetPrediction/K01")) {  // K01 - Court House
+    if (http.begin(client, "http://api.wmata.com/StationPrediction.svc/json/GetPrediction/C05")) {  // K01 - Court House, C05 - Rosslyn
 
       http.addHeader("api_key", "f5fdc3d819ad4e58b52c3746060d9f76");
 
