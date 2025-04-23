@@ -17,8 +17,8 @@ MCUFRIEND_kbv tft;
 #define WHITE   0xFFFF
 #define GREY    0x8410
 
-String station_name = "Rosslyn";
-uint16_t lines[3] = {ORANGE, BLUE, GREY};
+int header_end_h;
+const int line_width = 20;
 
 void setup(void)
 {
@@ -36,20 +36,18 @@ void setup(void)
     bool connected = false;
 
     while (!connected) {
-      if (Serial.available()) {
-        char payload[128];
-        int len = Serial.readBytesUntil('\n', payload, sizeof(payload) - 1);
-        payload[len] = '\0';
-
-        if (strcmp(payload, "CONNECTED\r") == 0) {
-          connected = true;
-          showmsgXY(20, 40, 2, NULL, "Connection established!");
-        }
-      } else {
-        delay(1000);
+      String payload = receiveMessage();
+      Serial.println(payload);
+      if (payload == "[CONNECTED]\r") {
+        connected = true;
+        showmsgXY(20, 40, 2, NULL, "Connection established!");
+      }
+      else if (payload == "[ERROR]\r") {
+        showmsgXY(20, 40, 2, NULL, "Error connecting to WiFi - please restart the box.");
       }
     }
-    Serial.println("READY");
+    calculateHeaderEndHeight();
+    Serial.println("[READY]");
     delay(1000);
     tft.fillScreen(BLACK);
 }
@@ -64,28 +62,35 @@ const int y[] = {y_start-(text_size*line_height*3), y_start-(text_size*line_heig
 
 void loop(void) 
 {
-    String payload = "";
-    bool rcvd = false;
-    while (!rcvd) {
-      if (Serial.available()) {
-        char c = Serial.read();
-        if (c != '\n') {
-          payload += c;
-        } else {
-          rcvd = true;
-        }
+    String payload = receiveMessage();
+    if (payload == "[ERROR]\r") {
+      showStatus(true);
+      // showTrains(",,,,,,,,,,,,");
+    }
+    else if payload[0] == 'S' {
+      showTrains(payload.substring(2));
+    }
+    else if payload[0] == 'T' {
+      showstatus(false);
+      showHeader(payload.substring(2));
+    }
+}
+
+String receiveMessage()
+{
+  String payload = "";
+  bool rcvd = false;
+  while (!rcvd) {
+    if (Serial.available()) {
+      char c = Serial.read();
+      if (c != '\n') {
+        payload += c;
+      } else {
+        rcvd = true;
       }
     }
-    if (payload == "ERROR\r") {
-      showHeader(true);
-      // showTrains(",,,,,,,,,,,,");
-      return;
-    }
-    else {
-      showHeader(false);
-      showTrains(payload.substring(2));
-      // tft.drawFastHLine(0, y_start-(text_size*line_height*4)-y_margin-5, tft.width(), WHITE);
-    }
+  }
+  return payload;
 }
 
 void showmsgXY(int x, int y, int sz, const GFXfont *f, const char *msg)
@@ -97,35 +102,57 @@ void showmsgXY(int x, int y, int sz, const GFXfont *f, const char *msg)
     tft.print(msg);
 }
 
-void showHeader(bool error)
+void calculateHeaderEndHeight()
+{
+  tft.setTextColor(WHITE, BLACK);
+  tft.setTextSize(1);
+  tft.setFont(&FreeSansBold18pt7b);
+  int16_t  x1, y1;
+  uint16_t w, h;
+  tft.getTextBounds(station_name, 0, 0, &x1, &y1, &w, &h);
+  header_end_h = h+60;
+}
+
+void showHeader(String payload)
 {
   tft.setTextColor(WHITE, BLACK);
   tft.setTextSize(1);
   tft.setFont(&FreeSansBold18pt7b);
 
-  int16_t  x1, y1;
-  uint16_t w, h;
-  tft.getTextBounds(station_name, 0, 0, &x1, &y1, &w, &h);
-  const int header_end_h = h+60;
-  const int line_width = 20;
-  int offset = 0;
-  for (uint16_t color : lines) {
-    tft.fillRect(line_width*offset, 0, line_width, header_end_h, color);
-    offset++;
+  String station_name;
+  int idx = 0;
+  String word = "";
+
+  Serial.print(payload);
+  for (int i = 0; i < payload.length(); i++) {
+    if (payload[i] == ',') {
+      if idx == 0 {
+        station_name = word;
+      } else {
+        tft.fillRect(line_width*(idx-1), 0, line_width, header_end_h, COLOR_MAP[word]);
+      }
+      word = "";
+      idx += 1;
+    } else {
+      word += payload[i];
+    }
   }
-  tft.setCursor(line_width*(offset+1), h+30);
+
+  tft.setCursor(line_width*idx, h+30);
   tft.print(station_name);
   // tft.drawFastHLine(0, header_end_h, tft.width(), WHITE);
-  // tft.setFont(NULL);
-  // tft.setTextSize(4);
-  // tft.setCursor(tft.width()-(header_end_h/2)-(line_width*2), h+30);
-  // tft.print(group);
+  // tft.drawFastHLine(0, y_start-(text_size*line_height*4)-y_margin-5, tft.width(), WHITE);
+}
 
+void showStatus(bool error)
+{
+  uint16_t color;
   if (error) {
-    tft.fillCircle(tft.width()-(header_end_h/2), header_end_h/2, 5, RED);
+    color = RED;
   } else {
-    tft.fillCircle(tft.width()-(header_end_h/2), header_end_h/2, 5, GREEN);
+    color = GREEN;
   }
+  tft.fillCircle(tft.width()-(header_end_h/2), header_end_h/2, 5, color);
 }
 
 void showTrains(String payload)
@@ -140,7 +167,6 @@ void showTrains(String payload)
 
   int idx = 0;
   String word = "";
-  int filler;
 
   Serial.print(payload);
   for (int i = 0; i < payload.length(); i++) {
