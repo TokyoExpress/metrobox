@@ -20,36 +20,44 @@ MCUFRIEND_kbv tft;
 int header_end_h;
 const int line_width = 20;
 
+void awaitConnection() {
+  bool connected = false;
+
+  while (!connected) {
+    String payload = receiveMessage();
+    Serial.println(payload);
+    if (payload == "[CONNECTED]\r") {
+      connected = true;
+      showmsgXY(20, 40, 2, NULL, "Connection established!           ");
+    }
+    else if (payload == "[AP]\r") {
+      showmsgXY(20, 40, 2, NULL, "Connect to \"Metrobox\" to set up.");
+    }
+    else if (payload == "[ERROR]\r") {
+      showmsgXY(20, 40, 2, NULL, "Error connecting to WiFi.");
+    }
+  }
+
+  delay(1000);
+  tft.fillScreen(BLACK);
+  Serial.println("[READY]");
+}
+
 void setup(void)
 {
-    Serial.begin(9600);
-    uint16_t ID = tft.readID();
-    Serial.println("STARTUP");
-    // Serial.print("found ID = 0x");
-    // Serial.println(ID, HEX);
-    if (ID == 0xD3D3) ID = 0x9481; //force ID if write-only display
-    tft.begin(ID);
-    tft.setRotation(1);
-    tft.fillScreen(BLACK);
+  Serial.begin(9600);
+  uint16_t ID = tft.readID();
+  Serial.println("STARTUP");
+  // Serial.print("found ID = 0x");
+  // Serial.println(ID, HEX);
+  if (ID == 0xD3D3) ID = 0x9481; //force ID if write-only display
+  tft.begin(ID);
+  tft.setRotation(1);
+  tft.fillScreen(BLACK);
+  calculateHeaderEndHeight();
 
-    showmsgXY(20, 10, 2, NULL, "Connecting to WiFi...");
-    bool connected = false;
-
-    while (!connected) {
-      String payload = receiveMessage();
-      Serial.println(payload);
-      if (payload == "[CONNECTED]\r") {
-        connected = true;
-        showmsgXY(20, 40, 2, NULL, "Connection established!");
-      }
-      else if (payload == "[ERROR]\r") {
-        showmsgXY(20, 40, 2, NULL, "Error connecting to WiFi - please restart the box.");
-      }
-    }
-    calculateHeaderEndHeight();
-    Serial.println("[READY]");
-    delay(1000);
-    tft.fillScreen(BLACK);
+  showmsgXY(20, 10, 2, NULL, "Connecting to WiFi...");
+  awaitConnection();
 }
 
 const int text_size = 4;
@@ -67,12 +75,17 @@ void loop(void)
       showStatus(true);
       // showTrains(",,,,,,,,,,,,");
     }
-    else if payload[0] == 'S' {
+    else if (payload[0] == 'S') {
+      showHeader(payload.substring(2));
+    }
+    else if (payload[0] == 'T') {
+      showStatus(false);
       showTrains(payload.substring(2));
     }
-    else if payload[0] == 'T' {
-      showstatus(false);
-      showHeader(payload.substring(2));
+    else if (payload == "[RESET]\r") {
+      tft.fillScreen(BLACK);
+      showmsgXY(20, 10, 2, NULL, "(Reset) Connecting to WiFi...");
+      awaitConnection();
     }
 }
 
@@ -102,6 +115,16 @@ void showmsgXY(int x, int y, int sz, const GFXfont *f, const char *msg)
     tft.print(msg);
 }
 
+uint16_t getColorFromLine(String line)
+{
+  if (line == "RD") return RED;
+  if (line == "OR") return ORANGE;
+  if (line == "BL") return BLUE;
+  if (line == "GR") return GREEN;
+  if (line == "YL") return YELLOW;
+  if (line == "SV") return GREY;
+}
+
 void calculateHeaderEndHeight()
 {
   tft.setTextColor(WHITE, BLACK);
@@ -109,12 +132,13 @@ void calculateHeaderEndHeight()
   tft.setFont(&FreeSansBold18pt7b);
   int16_t  x1, y1;
   uint16_t w, h;
-  tft.getTextBounds(station_name, 0, 0, &x1, &y1, &w, &h);
+  tft.getTextBounds("a", 0, 0, &x1, &y1, &w, &h);
   header_end_h = h+60;
 }
 
 void showHeader(String payload)
 {
+  tft.fillRect(0, 0, tft.width(), header_end_h, BLACK);
   tft.setTextColor(WHITE, BLACK);
   tft.setTextSize(1);
   tft.setFont(&FreeSansBold18pt7b);
@@ -126,10 +150,10 @@ void showHeader(String payload)
   Serial.print(payload);
   for (int i = 0; i < payload.length(); i++) {
     if (payload[i] == ',') {
-      if idx == 0 {
+      if (idx == 0) {
         station_name = word;
       } else {
-        tft.fillRect(line_width*(idx-1), 0, line_width, header_end_h, COLOR_MAP[word]);
+        tft.fillRect(line_width*(idx-1), 0, line_width, header_end_h, getColorFromLine(word));
       }
       word = "";
       idx += 1;
@@ -138,7 +162,7 @@ void showHeader(String payload)
     }
   }
 
-  tft.setCursor(line_width*idx, h+30);
+  tft.setCursor(line_width*idx, header_end_h-30);
   tft.print(station_name);
   // tft.drawFastHLine(0, header_end_h, tft.width(), WHITE);
   // tft.drawFastHLine(0, y_start-(text_size*line_height*4)-y_margin-5, tft.width(), WHITE);
