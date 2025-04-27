@@ -27,7 +27,7 @@ You can do the following on either a phone or a computer, but it will be easier 
 
 2. Go to where you would normally connect to a WiFi network and connect to the Access Point "Metrobox" with the password "metrobox". You will lose Internet access on this device until setup is complete, so be sure to keep the API key and station code on hand.
 
-3. A captive portal should open. Click on "Configure WiFi" and fill in your WiFi settings, the API key, and the station code.
+3. A captive portal should open. Click on "Configure WiFi" and fill in your WiFi settings, the API key, and the station code (notional example below).
 
 ![metrobox](https://github.com/user-attachments/assets/1a730281-59ac-4a62-aeeb-b104c2cb84c9)
 
