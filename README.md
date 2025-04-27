@@ -29,7 +29,7 @@ You can do the following on either a phone or a computer, but it will be easier 
 
 3. A captive portal should open. Click on "Configure WiFi" and fill in your WiFi settings, the API key, and the station code.
 
-![metrobox](https://github.com/user-attachments/assets/1a730281-59ac-4a62-aeeb-b104c2cb84c9)
+![metrobox](https://github.com/user-attachments/assets/1a730281-59ac-4a62-aeeb-b104c2cb84c9 | width=100)
 
 Once you hit "Save", the box should display `Connection established` and begin to display arrival times. You can then reconnect back to the Internet on your device.
 
