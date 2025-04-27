@@ -13,7 +13,7 @@ Once you have an account, go to Products -> Default Tier and subscribe a new pro
 
 2. You should be taken to the Profile page, where you can access your new API key. Keep this page open.
 
-<img src="https://github.com/user-attachments/assets/c0c7e95c-8c09-40ed-845e-4bf895470f79" width="700">
+<img src="https://github.com/user-attachments/assets/c0c7e95c-8c09-40ed-845e-4bf895470f79" width="800">
 
 #### Find Your Station Code
 
@@ -29,7 +29,7 @@ You can do the following on either a phone or a computer, but it will be easier 
 
 3. A captive portal should open. Click on "Configure WiFi" and fill in your WiFi settings, the API key, and the station code (notional example below).
 
-<img src="https://github.com/user-attachments/assets/1a730281-59ac-4a62-aeeb-b104c2cb84c9" width="300">
+<img src="https://github.com/user-attachments/assets/1a730281-59ac-4a62-aeeb-b104c2cb84c9" width="400">
 
 Once you hit "Save", the box should display `Connection established` and begin to display arrival times. You can then reconnect back to the Internet on your device.
 
