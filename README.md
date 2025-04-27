@@ -2,7 +2,7 @@
 
 Source code and build for a miniature WMATA Metrorail train arrivals board.
 
-## Configuring an Assembled and Programmed Metrobox
+## Configuring a Ready-to-Use Metrobox
 
 #### Obtain a WMATA API key
 
