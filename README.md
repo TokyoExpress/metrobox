@@ -13,7 +13,7 @@ Once you have an account, go to Products -> Default Tier and subscribe a new pro
 
 2. You should be taken to the Profile page, where you can access your new API key. Keep this page open.
 
-<img src="https://github.com/user-attachments/assets/c0c7e95c-8c09-40ed-845e-4bf895470f79" width="1000">
+<img src="https://github.com/user-attachments/assets/c0c7e95c-8c09-40ed-845e-4bf895470f79" width="700">
 
 #### Find Your Station Code
 
