@@ -37,7 +37,9 @@ The box is now successfully configured and will automatically function with the 
 
 #### Resetting
 
-If your box is already auto-connecting to your WiFi, you will have to reset the box in order to change stations or API keys after configuration. Upon connection, you should see a message saying `Visit http://<ip_address>/reset to reset`. Do this on any device that is connected to the same WiFi network and you should receive a message saying `Resetting configuration`. The box should no longer auto-connect and you can follow the instructions in [Configuring the Metrobox](#Configuring-the-Metrobox) to set it up again.
+If your box is already auto-connecting to your WiFi, you will have to reset the box in order to change stations or API keys after configuration. Upon connection, you should see a message saying `Visit http://<ip_address>/reset to reset`. Do this on any device that is connected to the same WiFi network and you should receive a message saying `Resetting configuration`.
+
+The box should no longer auto-connect and you can follow the instructions in [Configuring the Metrobox](#Configuring-the-Metrobox) to set it up again.
 
 ## Parts and Build (WIP)
 
