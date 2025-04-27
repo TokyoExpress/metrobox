@@ -21,7 +21,7 @@ Find your station name's corresponding 3-digit code in [wmata_station_codes.csv]
 
 #### Configuring the Metrobox
 
-1. Power on the box. You should see a message saying `Connect to "Metrobox" to set up`. If you don't see this and instead it shows `Connection established` and begins to show times for an unwanted station, follow the instructions in [Resetting](Resetting), then come back to this section.
+1. Power on the box. You should see a message saying `Connect to "Metrobox" to set up`. If you don't see this and instead it shows `Connection established` and begins to show times for an unwanted station, follow the instructions in [Resetting](#Resetting), then come back to this section.
 
 You can do the following on either a phone or a computer, but it will be easier on the same computer that you performed the above steps on since you will be able to copy-paste the API key.
 
@@ -37,7 +37,7 @@ The box is now successfully configured and will automatically function with the 
 
 #### Resetting
 
-If your box is already auto-connecting to your WiFi, you will have to reset the box in order to change stations or API keys after configuration. Upon connection, you should see a message saying `Visit http://<ip_address>/reset to reset`. Do this on any device that is connected to the same WiFi network and you should receive a message saying `Resetting configuration`. The box should no longer auto-connect and you can follow the instructions in [Configuring the Metrobox](Configuring-the-Metrobox) to set it up again.
+If your box is already auto-connecting to your WiFi, you will have to reset the box in order to change stations or API keys after configuration. Upon connection, you should see a message saying `Visit http://<ip_address>/reset to reset`. Do this on any device that is connected to the same WiFi network and you should receive a message saying `Resetting configuration`. The box should no longer auto-connect and you can follow the instructions in [Configuring the Metrobox](#Configuring-the-Metrobox) to set it up again.
 
 ## Parts and Build (WIP)
 
