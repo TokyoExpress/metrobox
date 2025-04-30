@@ -11,11 +11,13 @@ MCUFRIEND_kbv tft;
 #define BLACK   0x0000
 #define RED     0xF800
 #define ORANGE  0xFA60
-#define BLUE    0x13B8
-#define GREEN   0x07E0
-#define YELLOW  0xFFE0
+#define BLUE    0x00f8
+#define GREEN   0x0280
+#define YELLOW  0xce40
 #define WHITE   0xFFFF
-#define GREY    0x8410
+#define GREY    0x2144
+
+#define TRAIN   0xFD20
 
 int header_end_h;
 const int line_width = 20;
@@ -26,9 +28,13 @@ void awaitConnection() {
   while (!connected) {
     String payload = receiveMessage();
     Serial.println(payload);
-    if (payload == "[CONNECTED]\r") {
+    if (payload.substring(0, 11) == "[CONNECTED]") {
+      String ip = payload.substring(12);
+      String resetMessageStr = "Reset: http://" + ip + "/reset";
       connected = true;
-      showmsgXY(20, 40, 2, NULL, "Connection established!           ");
+      showmsgXY(20, 10, 2, NULL, "Connection established!           ");
+      showmsgXY(20, 40, 2, NULL, "Starting in 10 seconds.");
+      showmsgXY(20, 70, 2, NULL, resetMessageStr.c_str());
     }
     else if (payload == "[AP]\r") {
       showmsgXY(20, 40, 2, NULL, "Connect to \"Metrobox\" to set up.");
@@ -38,7 +44,7 @@ void awaitConnection() {
     }
   }
 
-  delay(1000);
+  delay(10000);
   tft.fillScreen(BLACK);
   Serial.println("[READY]");
 }
@@ -54,6 +60,7 @@ void setup(void)
   tft.begin(ID);
   tft.setRotation(1);
   tft.fillScreen(BLACK);
+  tft.setTextWrap(false);
   calculateHeaderEndHeight();
 
   showmsgXY(20, 10, 2, NULL, "Connecting to WiFi...");
@@ -125,9 +132,53 @@ uint16_t getColorFromLine(String line)
   if (line == "SV") return GREY;
 }
 
+String getFirstTerm(String s)
+{
+  int slashIndex = s.indexOf('/');
+  int dashIndex = s.indexOf('-');
+  if (slashIndex == -1) slashIndex = s.length();
+  if (dashIndex == -1) dashIndex = s.length();
+
+  int splitIndex = min(slashIndex, dashIndex);
+  if (splitIndex != s.length()) {
+    return s.substring(0, splitIndex);
+  }
+  return s;
+}
+
+String fitStationName(String station_name, int16_t start_x)
+{
+  int16_t  x1, y1;
+  uint16_t w, h;
+  int rightEdge = tft.width()-header_end_h;
+  tft.getTextBounds(station_name, start_x, header_end_h-30, &x1, &y1, &w, &h);
+  if (x1 + w <= rightEdge) return station_name;
+  station_name = getFirstTerm(station_name);
+  tft.getTextBounds(station_name, start_x, header_end_h-30, &x1, &y1, &w, &h);
+  if (x1 + w <= rightEdge) return station_name;
+  String truncatedName = "";
+  String word = " ";
+  int index = 0;
+  while (index < station_name.length()) {
+    char c = station_name[index];
+    if (c == ' ' || index == station_name.length() - 1) {
+      tft.getTextBounds(truncatedName + word, start_x, header_end_h-30, &x1, &y1, &w, &h);
+      if (x1 + w > rightEdge) {
+        break;
+      }
+      truncatedName += word;
+      word = " ";
+    }
+    else {
+      word += c;
+    }
+    index++;
+  }
+  return truncatedName.substring(1);
+}
+
 void calculateHeaderEndHeight()
 {
-  tft.setTextColor(WHITE, BLACK);
   tft.setTextSize(1);
   tft.setFont(&FreeSansBold18pt7b);
   int16_t  x1, y1;
@@ -163,6 +214,7 @@ void showHeader(String payload)
   }
 
   tft.setCursor(line_width*idx, header_end_h-30);
+  station_name = fitStationName(station_name, line_width*idx);
   tft.print(station_name);
   // tft.drawFastHLine(0, header_end_h, tft.width(), WHITE);
   // tft.drawFastHLine(0, y_start-(text_size*line_height*4)-y_margin-5, tft.width(), WHITE);
@@ -187,7 +239,7 @@ void showTrains(String payload)
   tft.setCursor(x[0], y_start-(text_size*line_height*4));
   tft.print("LN CAR DEST    MIN");
 
-  tft.setTextColor(YELLOW, BLACK);
+  tft.setTextColor(TRAIN, BLACK);
 
   int idx = 0;
   String word = "";

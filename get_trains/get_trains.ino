@@ -11,7 +11,7 @@ StaticJsonDocument<512> doc;
 WiFiManager wm;
 char apiKey[34] = "";
 char stationCode[4] = "C01";
-WiFiManagerParameter apiKeyParam("api_key", "WMATA API key", apiKey, 32);
+WiFiManagerParameter apiKeyParam("api_key", "WMATA API Key", apiKey, 32);
 WiFiManagerParameter stationCodeParam("station_code", "Metro Station Code", stationCode, 3);
 
 bool shouldSaveConfig = false;
@@ -106,10 +106,8 @@ void setup() {
 
   Serial.println("apiKey: " + String(apiKey));
   Serial.println("stationCode: " + String(stationCode));
-  Serial.print("IP address: ");
-  Serial.println(WiFi.localIP());
 
-  Serial.println("\n[CONNECTED]");
+  Serial.println("\n[CONNECTED] " + WiFi.localIP().toString());
   
 
   bool ready = false;
