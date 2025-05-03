@@ -7,13 +7,13 @@ Source code and build for a miniature WMATA Metrorail train arrivals board.
 #### Obtain a WMATA API key
 
 1. Sign up for an account at https://developer.wmata.com/signup/ and verify your email.
-Once you have an account, go to Products -> Default Tier and subscribe a new product.
+Once you have an account, go to Products -> Default Tier and subscribe a new product in the section shown below (the name does not matter).
 
-<img src="https://github.com/user-attachments/assets/db1c2b66-29bb-4d52-bea0-09c1ff52db15" width="1000">
+<img src="https://github.com/user-attachments/assets/0f91c9cd-96ff-4a55-b4f0-fac1dbf8b521" width="1000">
 
 2. You should be taken to the Profile page, where you can access your new API key. Keep this page open.
 
-<img src="https://github.com/user-attachments/assets/c0c7e95c-8c09-40ed-845e-4bf895470f79" width="800">
+<img src="https://github.com/user-attachments/assets/53431f79-78f3-45a3-9787-44904617d616" width="800">
 
 #### Find Your Station Code
 
@@ -27,7 +27,7 @@ You can do the following on either a phone or a computer, but it will be easier 
 
 2. Go to where you would normally connect to a WiFi network and connect to the Access Point "Metrobox" with the password "metrobox". You will lose Internet access on this device until setup is complete, so be sure to keep the API key and station code on hand.
 
-3. A captive portal should open. Click on "Configure WiFi" and fill in your WiFi settings, the API key, and the station code (notional example below).
+3. A captive portal should open. Click on "Configure WiFi" and fill in your WiFi settings, the primary API key, and the station code (notional example below).
 
 <img src="https://github.com/user-attachments/assets/1a730281-59ac-4a62-aeeb-b104c2cb84c9" width="400">
 
