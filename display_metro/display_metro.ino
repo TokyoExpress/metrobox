@@ -11,18 +11,27 @@ MCUFRIEND_kbv tft;
 #define BLACK   0x0000
 #define RED     0xF800
 #define ORANGE  0xFA60
-#define BLUE    0x00f8
+#define BLUE    0x018F
 #define GREEN   0x0280
-#define YELLOW  0xce40
+#define YELLOW  0xCE40
 #define WHITE   0xFFFF
-#define GREY    0x2144
+#define GREY    0x4A69
 
 #define TRAIN   0xFD20
 
 int header_end_h;
 const int line_width = 20;
+const int text_size = 4;
+const int slots[] = {2, 1, 9, 3};
+const int x[] = {text_size*6, text_size*6*4, text_size*6*6, text_size*6*16};
+const int y_margin = 25;
+const int line_height = 9;
+const int y_start = tft.height()-y_margin;
+const int y[] = {y_start-(text_size*line_height*3), y_start-(text_size*line_height*2), y_start-(text_size*line_height)};
+const int header_start = y_start-(text_size*line_height*4);
 
 void awaitConnection() {
+  showHeader("Metrobox,WH,WH,WH,");
   bool connected = false;
 
   while (!connected) {
@@ -32,15 +41,15 @@ void awaitConnection() {
       String ip = payload.substring(12);
       String resetMessageStr = "Reset: http://" + ip + "/reset";
       connected = true;
-      showmsgXY(20, 10, 2, NULL, "Connection established!           ");
-      showmsgXY(20, 40, 2, NULL, "Starting in 10 seconds.");
-      showmsgXY(20, 70, 2, NULL, resetMessageStr.c_str());
+      showmsgXY(20, header_start, 2, NULL, "Connection established!           ");
+      showmsgXY(20, header_start + 30, 2, NULL, "Starting in 10 seconds.           ");
+      showmsgXY(20, header_start + 60, 2, NULL, resetMessageStr.c_str());
     }
     else if (payload == "[AP]\r") {
-      showmsgXY(20, 40, 2, NULL, "Connect to \"Metrobox\" to set up.");
+      showmsgXY(20, header_start + 30, 2, NULL, "Connect to \"Metrobox\" to set up.");
     }
     else if (payload == "[ERROR]\r") {
-      showmsgXY(20, 40, 2, NULL, "Error connecting to WiFi.");
+      showmsgXY(20, header_start + 30, 2, NULL, "Error connecting to WiFi.         ");
     }
   }
 
@@ -63,17 +72,9 @@ void setup(void)
   tft.setTextWrap(false);
   calculateHeaderEndHeight();
 
-  showmsgXY(20, 10, 2, NULL, "Connecting to WiFi...");
+  showmsgXY(20, header_start, 2, NULL, "Connecting to WiFi...");
   awaitConnection();
 }
-
-const int text_size = 4;
-const int slots[] = {2, 1, 9, 3};
-const int x[] = {text_size*6, text_size*6*4, text_size*6*6, text_size*6*16};
-const int y_margin = 20;
-const int line_height = 9;
-const int y_start = tft.height()-y_margin;
-const int y[] = {y_start-(text_size*line_height*3), y_start-(text_size*line_height*2), y_start-(text_size*line_height)};
 
 void loop(void) 
 {
@@ -91,7 +92,7 @@ void loop(void)
     }
     else if (payload == "[RESET]\r") {
       tft.fillScreen(BLACK);
-      showmsgXY(20, 10, 2, NULL, "(Reset) Connecting to WiFi...");
+      showmsgXY(20, header_start, 2, NULL, "(Reset) Connecting to WiFi...");
       awaitConnection();
     }
 }
@@ -117,13 +118,14 @@ void showmsgXY(int x, int y, int sz, const GFXfont *f, const char *msg)
 {
     tft.setFont(f);
     tft.setCursor(x, y);
-    tft.setTextColor(GREEN, BLACK);
+    tft.setTextColor(WHITE, BLACK);
     tft.setTextSize(sz);
     tft.print(msg);
 }
 
 uint16_t getColorFromLine(String line)
 {
+  if (line == "WH") return WHITE;
   if (line == "RD") return RED;
   if (line == "OR") return ORANGE;
   if (line == "BL") return BLUE;
@@ -184,7 +186,7 @@ void calculateHeaderEndHeight()
   int16_t  x1, y1;
   uint16_t w, h;
   tft.getTextBounds("a", 0, 0, &x1, &y1, &w, &h);
-  header_end_h = h+60;
+  header_end_h = h+70;
 }
 
 void showHeader(String payload)
@@ -204,7 +206,7 @@ void showHeader(String payload)
       if (idx == 0) {
         station_name = word;
       } else {
-        tft.fillRect(line_width*(idx-1), 0, line_width, header_end_h, getColorFromLine(word));
+        tft.fillRect(line_width*(idx-1), 0, line_width, header_end_h+20, getColorFromLine(word));
       }
       word = "";
       idx += 1;
@@ -213,7 +215,7 @@ void showHeader(String payload)
     }
   }
 
-  tft.setCursor(line_width*idx, header_end_h-30);
+  tft.setCursor(line_width*idx, header_end_h-35);
   station_name = fitStationName(station_name, line_width*idx);
   tft.print(station_name);
   // tft.drawFastHLine(0, header_end_h, tft.width(), WHITE);
@@ -236,7 +238,7 @@ void showTrains(String payload)
   tft.setFont(NULL);
   tft.setTextColor(RED);
   tft.setTextSize(text_size);
-  tft.setCursor(x[0], y_start-(text_size*line_height*4));
+  tft.setCursor(x[0], header_start);
   tft.print("LN CAR DEST    MIN");
 
   tft.setTextColor(TRAIN, BLACK);
