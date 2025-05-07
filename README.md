@@ -47,7 +47,7 @@ The box should no longer auto-connect and you can follow the instructions in [Co
 
 ---
 
-## Parts and Build (WIP)
+## Parts and Build
 
 To make this yourself, you will need the following (links may need updating):
 - UNO R3 + WIFI ESP8266, [example "UNO R3 Black"](https://www.aliexpress.us/item/3256806816026732.html)
@@ -55,7 +55,40 @@ To make this yourself, you will need the following (links may need updating):
 - Micro-USB cable
 - 3D printer or access to 3D printing services
 
+![components](https://github.com/user-attachments/assets/339163df-8bea-435f-b5e7-586ea0b838e8)
 
+### Uploading Software
 
+1. Install the [Arduino IDE](https://www.arduino.cc/en/software/).
+2. [Install the ESP8266 platform into Arduino IDE Boards Manager](https://github.com/esp8266/Arduino?tab=readme-ov-file#installing-with-boards-manager)
+3. [Add libraries](https://support.arduino.cc/hc/en-us/articles/5145457742236-Add-libraries-to-Arduino-IDE) WiFiManager, ArduinoJson, MCUFRIEND_kbv, and Adafruit GFX Library.
+4. You are now ready to begin [uploading sketches](https://support.arduino.cc/hc/en-us/articles/4733418441116-Upload-a-sketch-in-Arduino-IDE) to the board. To start, ensure that the UNO R3 is recognized by Arduino IDE when plugged into the computer. If not, you may need to install the [CH340G drivers](https://www.wch.cn/downloads/CH341SER_ZIP.html)
 
-### Software (WIP)
+The board controls communications using a DIP switch as pictured below. You will need to use a small needle or pin to set the switches appropriately for each of the next steps.
+
+![dip switch](https://github.com/user-attachments/assets/9ed1c4f8-131f-44bb-a8a0-c41e6dd24821)
+![setups](https://github.com/user-attachments/assets/d50c6346-fb41-4efa-9b78-ec938e37b345)
+
+a. With only switches 5, 6, and 7 in the "on" position, upload `get_trains.ino` with board "Generic ESP8266 Module".
+b. With only switches 3 and 4 in the "on" position, upload `display_metro.ino` with board "Arduino UNO".
+c. Set only switches 1 and 2 to the "on" position.
+
+If all uploads succeeded, you are ready to move on to the assembly portion.
+
+### Printing and Assembly
+
+3D print files (TBD)
+
+1. Place the UNO R3 board inside the case so that the ports line up with the holes.
+
+![494358693_949836297227734_8370262248152707982_n 1](https://github.com/user-attachments/assets/b35d52f9-d78a-41cd-b75d-a1778da796ea)
+
+2. Line up the TFT shield pins with the UNO R3 and connect the two components.
+
+![494812978_1202707301205929_8375195684690110429_n 1](https://github.com/user-attachments/assets/fc94184a-7a6b-45d9-ac89-981b0ad9e400)
+
+3. Place and snap the cover on.
+
+![494860804_1945757139497187_8018358129188421132_n 1](https://github.com/user-attachments/assets/ea6cfae6-b9d7-4bf4-8b8e-7586797b5957)
+
+The Metrobox is now complete and ready for [Configuring a Ready-to-Use Metrobox](#Configuring-a-Ready-to-Use-Metrobox).
