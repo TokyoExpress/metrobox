@@ -52,8 +52,10 @@ The box should no longer auto-connect and you can follow the instructions in [Co
 To make this yourself, you will need the following (links may need updating):
 - UNO R3 + WIFI ESP8266, [example "UNO R3 Black"](https://www.aliexpress.us/item/3256806816026732.html)
 - 3.5" TFT LCD Shield for Arduino Uno (no touchscreen), [example "Without Touch"](https://www.aliexpress.us/item/3256806911484514.html)
-- Micro-USB cable
+- Micro-USB cable, [optionally angled and the same color as the case like this example](https://www.aliexpress.us/item/3256806917070642.html)
 - 3D printer or access to 3D printing services
+
+Altogether the total cost should come out to around $15-20, depending on international trade climate and other factors.
 
 ![components](https://github.com/user-attachments/assets/339163df-8bea-435f-b5e7-586ea0b838e8)
 
