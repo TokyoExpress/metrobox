@@ -62,7 +62,7 @@ To make this yourself, you will need the following (links may need updating):
 1. Install the [Arduino IDE](https://www.arduino.cc/en/software/).
 2. [Install the ESP8266 platform into Arduino IDE Boards Manager](https://github.com/esp8266/Arduino?tab=readme-ov-file#installing-with-boards-manager)
 3. [Add libraries](https://support.arduino.cc/hc/en-us/articles/5145457742236-Add-libraries-to-Arduino-IDE) WiFiManager, ArduinoJson, MCUFRIEND_kbv, and Adafruit GFX Library.
-4. You are now ready to begin [uploading sketches](https://support.arduino.cc/hc/en-us/articles/4733418441116-Upload-a-sketch-in-Arduino-IDE) to the board. To start, ensure that the UNO R3 is recognized by Arduino IDE when plugged into the computer. If not, you may need to install the [CH340G drivers](https://www.wch.cn/downloads/CH341SER_ZIP.html)
+4. You are now ready to begin [uploading sketches](https://support.arduino.cc/hc/en-us/articles/4733418441116-Upload-a-sketch-in-Arduino-IDE) to the board. To start, ensure that the UNO R3 is recognized by Arduino IDE when plugged into the computer. If not, you may need to install the [CH340G drivers](https://www.wch.cn/downloads/CH341SER_ZIP.html).
 
 The board controls communications using a DIP switch as pictured below. You will need to use a small needle or pin to set the switches appropriately for each of the next steps.
 
