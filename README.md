@@ -81,7 +81,7 @@ If all uploads succeeded, you are ready to move on to the assembly portion.
 
 ### Printing and Assembly
 
-3D print files (TBD)
+3D print files and information can be found [here](https://www.thingiverse.com/thing:7031113).
 
 1. Place the UNO R3 board inside the case so that the ports line up with the holes.
 
