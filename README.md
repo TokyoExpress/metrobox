@@ -83,6 +83,8 @@ If all uploads succeeded, you are ready to move on to the assembly portion.
 
 3D print files and information can be found [here](https://www.thingiverse.com/thing:7031113).
 
+#### Assembly Steps:
+
 1. Place the UNO R3 board inside the case so that the ports line up with the holes.
 
 ![494358693_949836297227734_8370262248152707982_n 1](https://github.com/user-attachments/assets/b35d52f9-d78a-41cd-b75d-a1778da796ea)
