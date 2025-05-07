@@ -69,9 +69,9 @@ The board controls communications using a DIP switch as pictured below. You will
 ![dip switch](https://github.com/user-attachments/assets/9ed1c4f8-131f-44bb-a8a0-c41e6dd24821)
 ![setups](https://github.com/user-attachments/assets/d50c6346-fb41-4efa-9b78-ec938e37b345)
 
-a. With only switches 5, 6, and 7 in the "on" position, upload `get_trains.ino` with board "Generic ESP8266 Module".
+a. With only switches 5, 6, and 7 in the "on" position, upload `get_trains.ino` with board type set to "Generic ESP8266 Module".
 
-b. With only switches 3 and 4 in the "on" position, upload `display_metro.ino` with board "Arduino UNO".
+b. With only switches 3 and 4 in the "on" position, upload `display_metro.ino` with board type set to "Arduino UNO".
 
 c. Set only switches 1 and 2 to the "on" position.
 
