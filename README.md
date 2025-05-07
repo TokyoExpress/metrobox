@@ -45,12 +45,17 @@ If your box is already auto-connecting to your WiFi, you will have to reset the 
 
 The box should no longer auto-connect and you can follow the instructions in [Configuring the Metrobox](#Configuring-the-Metrobox) to set it up again.
 
+---
+
 ## Parts and Build (WIP)
 
-To make this yourself, you will need:
-- UNO R3 + WIFI ESP8266
-- 3.5" TFT LCD Shield for Arduino Uno
+To make this yourself, you will need the following (links may need updating):
+- UNO R3 + WIFI ESP8266, [example "UNO R3 Black"](https://www.aliexpress.us/item/3256806816026732.html)
+- 3.5" TFT LCD Shield for Arduino Uno (no touchscreen), [example "Without Touch"](https://www.aliexpress.us/item/3256806911484514.html)
 - Micro-USB cable
 - 3D printer or access to 3D printing services
+
+
+
 
 ### Software (WIP)
