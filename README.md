@@ -59,6 +59,8 @@ Altogether the total cost should come out to around $15-20, depending on interna
 
 ![components](https://github.com/user-attachments/assets/339163df-8bea-435f-b5e7-586ea0b838e8)
 
+Note: After buying parts from various AliExpress sellers I have confirmed that the 3D models may not work for all parts, as there are discrepancies in dimensions and fit between different products of the same type. Additionally, the specific products that I purchased have been taken down and are no longer available. I am thinking of how to solve this but in the meantime if you plan to purchase your own parts and replicate this project feel free to leave an issue or contact me and I can advise further. 
+
 ### Uploading Software
 
 1. Install the [Arduino IDE](https://www.arduino.cc/en/software/).
@@ -88,6 +90,7 @@ Note: After buying parts from various AliExpress sellers I have confirmed that t
 The 3D print files were created using these products:
 
 https://www.aliexpress.us/item/3256804704287770.html (3.5 inch 480*320 TFT LCD Module Screen Display ILI9486 Controller for Arduino UNO MEGA2560 Board with/Without Touch Panel)
+
 https://www.aliexpress.us/item/3256806674644408.html (UNO R3 Official ATMEGA16U2 / UNO+WiFi R3 MEGA328P Chip CH340G For Arduino UNO R3 Development Board WeMos ESP8266: UNO R3 Black)
 
 
