@@ -83,6 +83,14 @@ If all uploads succeeded, you are ready to move on to the assembly portion.
 
 3D print files and information can be found [here](https://www.thingiverse.com/thing:7031113).
 
+Note: After buying parts from various AliExpress sellers I have confirmed that the 3D models may not work for all parts, as there are discrepancies in dimensions and fit between different products of the same type. Additionally, the specific products that I purchased have been taken down and are no longer available. I am thinking of how to solve this but in the meantime if you plan to purchase your own parts and replicate this project feel free to leave an issue or contact me and I can advise further.
+
+The 3D print files were created using these products:
+
+https://www.aliexpress.us/item/3256804704287770.html (3.5 inch 480*320 TFT LCD Module Screen Display ILI9486 Controller for Arduino UNO MEGA2560 Board with/Without Touch Panel)
+https://www.aliexpress.us/item/3256806674644408.html (UNO R3 Official ATMEGA16U2 / UNO+WiFi R3 MEGA328P Chip CH340G For Arduino UNO R3 Development Board WeMos ESP8266: UNO R3 Black)
+
+
 #### Assembly Steps:
 
 1. Place the UNO R3 board inside the case so that the ports line up with the holes.
