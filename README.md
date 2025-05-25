@@ -77,11 +77,19 @@ a. With only switches 5, 6, and 7 in the "on" position, upload `get_trains.ino` 
 
 b. With only switches 3 and 4 in the "on" position, upload `display_metro.ino` with board type set to "Arduino UNO".
 
-Note: It seems that the LCD shield parts have minor variations in color display. You can test out the screen functionality as follows - after uploading this file, with the board connected, open Serial Monitor and enter "[CONNECTED]". Wait for the screen to go black after the 10 seconds and enter "S:TEST,BL,OR,SV,RD,GR,YL". You should be able to see all possible color bars for the lines. If any seem off, you can tune the colors defined in the beginning of the file and re-upload. I use https://rgbcolorpicker.com/565 to find new values.
+Optional: It seems that the LCD shield parts have minor variations in color display, so the line colors may not appear as expected. You can test out the screen functionality as follows - after uploading this file, with the board connected, open Serial Monitor and enter "[CONNECTED]". Wait for the screen to go black after the 10 seconds and enter "S:TEST,BL,OR,SV,RD,GR,YL". You should be able to see all possible color bars for the lines. If any seem off, you can tune the colors defined in the beginning of the file and re-upload. I use https://rgbcolorpicker.com/565 to find new values.
 
 c. Set only switches 1 and 2 to the "on" position.
 
 If all uploads succeeded, you are ready to move on to the assembly portion.
+
+### Optional: Color Calibration
+
+It seems that the LCD shield parts have minor variations in color display, so the line colors may not appear as expected. If this is the case for you, repeat step B from the previous section but with these additional steps:
+
+- After uploading this file, with the board connected, open Serial Monitor and enter "[CONNECTED]".
+- Wait for the screen to go black after the 10 seconds and enter "S:TEST,BL,OR,SV,RD,GR,YL". You should be able to see all possible color bars for the lines.
+- If any seem off, you can tune the colors defined in the beginning of the file and re-upload. I use https://rgbcolorpicker.com/565 to test and create new values.
 
 ### Printing and Assembly
 
