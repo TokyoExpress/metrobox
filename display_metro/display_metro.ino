@@ -9,13 +9,13 @@ MCUFRIEND_kbv tft;
 #include <FreeDefaultFonts.h>
 
 #define BLACK   0x0000
-#define RED     0xF800
-#define ORANGE  0xFA60
-#define BLUE    0x018F
-#define GREEN   0x0280
-#define YELLOW  0xCE40
+#define RED     0xf0e3
+#define ORANGE  0xfbc0
+#define BLUE    0x1af8
+#define GREEN   0x0520
+#define YELLOW  0xef61
 #define WHITE   0xFFFF
-#define GREY    0x4A69
+#define GREY    0x8c51
 
 #define TRAIN   0xFD20
 
