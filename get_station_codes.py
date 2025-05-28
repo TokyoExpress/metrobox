@@ -1,14 +1,32 @@
 import csv
 import requests
+import os
+from dotenv import load_dotenv
 
-api_key = "11d2faeb6b4d4d01a70ef02d8c331258"
+load_dotenv()
 
-r = requests.get('https://api.wmata.com/Rail.svc/json/jStations', headers={"api_key": api_key})
+api_key = os.getenv("WMATA_API_KEY")
+if not api_key:
+    raise ValueError("WMATA_API_KEY not found in .env file. Did you properly set it up like .env-example?")
+
+response = requests.get(
+    'https://api.wmata.com/Rail.svc/json/jStations',
+    headers={"api_key": api_key}
+)
 
 out = []
 
-for i in r.json()['Stations']:
-    out.append([i['Name'], i['Code'], ', '.join([i[f'LineCode{z}'] for z in range(1, 5) if i[f'LineCode{z}']])])
+try:
+    stations = response.json()['Stations']
+except Exception as e:
+    raise RuntimeError("Failed to parse stations from WMATA API response.") from e
+
+for i in stations:
+    out.append([
+        i['Name'],
+        i['Code'],
+        ', '.join([i[f'LineCode{z}'] for z in range(1, 5) if i.get(f'LineCode{z}')])
+    ])
 
 header = ["Station", "Code", "Lines"]
 with open('wmata_station_codes.csv', 'w', newline='') as f:
