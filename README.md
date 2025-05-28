@@ -49,6 +49,8 @@ The box should no longer auto-connect and you can follow the instructions in [Co
 
 ## Parts and Build
 
+Note: After buying parts from various AliExpress sellers I have confirmed that the 3D models may not work for all parts, as there are discrepancies in dimensions and fit between different products of the same type. Additionally, the specific products that I purchased have been taken down and are no longer available. I am thinking of how to solve this but in the meantime if you plan to purchase your own parts and replicate this project feel free to leave an issue or contact me and I can advise further. 
+
 To make this yourself, you will need the following (links may need updating):
 - UNO R3 + WIFI ESP8266, [example "UNO R3 Black"](https://www.aliexpress.us/item/3256806816026732.html)
 - 3.5" TFT LCD Shield for Arduino Uno (no touchscreen), [example "Without Touch"](https://www.aliexpress.us/item/3256806911484514.html)
@@ -58,8 +60,6 @@ To make this yourself, you will need the following (links may need updating):
 Altogether the total cost should come out to around $15-20, depending on international trade climate and other factors.
 
 ![components](https://github.com/user-attachments/assets/339163df-8bea-435f-b5e7-586ea0b838e8)
-
-Note: After buying parts from various AliExpress sellers I have confirmed that the 3D models may not work for all parts, as there are discrepancies in dimensions and fit between different products of the same type. Additionally, the specific products that I purchased have been taken down and are no longer available. I am thinking of how to solve this but in the meantime if you plan to purchase your own parts and replicate this project feel free to leave an issue or contact me and I can advise further. 
 
 ### Uploading Software
 
@@ -97,7 +97,7 @@ It seems that the LCD shield parts have minor variations in color display, so th
 
 Note: After buying parts from various AliExpress sellers I have confirmed that the 3D models may not work for all parts, as there are discrepancies in dimensions and fit between different products of the same type. Additionally, the specific products that I purchased have been taken down and are no longer available. I am thinking of how to solve this but in the meantime if you plan to purchase your own parts and replicate this project feel free to leave an issue or contact me and I can advise further.
 
-The 3D print files were created using these products:
+The 3D print files were created using these product links (which I think may have since been taken down and replaced with different parts):
 
 https://www.aliexpress.us/item/3256804704287770.html (3.5 inch 480*320 TFT LCD Module Screen Display ILI9486 Controller for Arduino UNO MEGA2560 Board: Without Touch Panel)
 
