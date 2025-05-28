@@ -99,7 +99,7 @@ Note: After buying parts from various AliExpress sellers I have confirmed that t
 
 The 3D print files were created using these products:
 
-https://www.aliexpress.us/item/3256804704287770.html (3.5 inch 480*320 TFT LCD Module Screen Display ILI9486 Controller for Arduino UNO MEGA2560 Board with/Without Touch Panel)
+https://www.aliexpress.us/item/3256804704287770.html (3.5 inch 480*320 TFT LCD Module Screen Display ILI9486 Controller for Arduino UNO MEGA2560 Board: Without Touch Panel)
 
 https://www.aliexpress.us/item/3256806674644408.html (UNO R3 Official ATMEGA16U2 / UNO+WiFi R3 MEGA328P Chip CH340G For Arduino UNO R3 Development Board WeMos ESP8266: UNO R3 Black)
 
