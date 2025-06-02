@@ -73,6 +73,8 @@ The board controls communications using a DIP switch as pictured below. You will
 ![dip switch](https://github.com/user-attachments/assets/9ed1c4f8-131f-44bb-a8a0-c41e6dd24821)
 ![setups](https://github.com/user-attachments/assets/d50c6346-fb41-4efa-9b78-ec938e37b345)
 
+Make sure for the following steps that your Serial Monitor baud rate is set to 9600.
+
 a. With only switches 5, 6, and 7 in the "on" position, upload `get_trains.ino` with board type set to "Generic ESP8266 Module".
 
 b. With only switches 3 and 4 in the "on" position, upload `display_metro.ino` with board type set to "Arduino UNO".
@@ -87,8 +89,9 @@ If all uploads succeeded, you are ready to move on to the assembly portion.
 
 It seems that the LCD shield parts have minor variations in color display, so the line colors may not appear as expected. If this is the case for you, repeat step B from the previous section but with these additional steps:
 
+- Make sure only switches 3 and 4 are in the "on" position.
 - After uploading this file, with the board connected, open Serial Monitor and enter "[CONNECTED]".
-- Wait for the screen to go black after the 10 seconds and enter "S:TEST,BL,OR,SV,RD,GR,YL". You should be able to see all possible color bars for the lines.
+- Wait for the screen to go black after the 10 seconds and enter "S:TEST,BL,OR,SV,RD,GR,YL,". You should be able to see all possible color bars for the lines.
 - If any seem off, you can tune the colors defined in the beginning of the file and re-upload. I use https://rgbcolorpicker.com/565 to test and create new values.
 
 ### Printing and Assembly
