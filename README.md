@@ -100,6 +100,8 @@ https://www.aliexpress.us/item/3256806674644408.html (UNO R3 Official ATMEGA16U2
 
 #### Assembly Steps:
 
+Note: The solders below the barrel power connector on the Arduino needed to be clipped off in order for it to fit (TODO: add picture).
+
 1. Place the UNO R3 board inside the case so that the ports line up with the holes.
 
 ![494358693_949836297227734_8370262248152707982_n 1](https://github.com/user-attachments/assets/b35d52f9-d78a-41cd-b75d-a1778da796ea)
